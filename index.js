@@ -1,5 +1,8 @@
+const express = require("express")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
+
+const app = express()
 
 dotenv.config()
 
@@ -13,4 +16,10 @@ mongoose.connection.on("error", function (error) {
 
 mongoose.connection.on("open", function () {
     console.log("Connected to MongoDB database.")
+})
+
+app.use(express.json());
+
+app.listen(5000, ()=> {
+    console.log("Listening on port 5000")
 })
