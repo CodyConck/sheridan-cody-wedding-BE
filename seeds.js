@@ -24,3 +24,29 @@ app.use(express.json());
 app.listen(5000, ()=> {
     console.log("Listening on port 5000")
 })
+
+const seedGuests = [
+    {
+        firstName: 'Wayne',
+        lastName: 'Lichliter',
+        address: 'Sleepy Hollow Cove',
+        plusOne: true,
+        sigOth: 'Sharon Lichliter'
+    },
+    {
+        firstName: 'Eric',
+        lastName: 'Concklin',
+        address: 'Cadillac Ave',
+        plusOne: true,
+        sigOth: 'Paton Fellows'
+    }
+];
+
+const seedDB = async () => {
+    await Guest.deleteMany({});
+    await Guest.insertMany(seedGuests)
+};
+
+seedDB().then(()=> {
+    mongoose.connection.close()
+});
